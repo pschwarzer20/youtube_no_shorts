@@ -9,9 +9,10 @@
         "48": "icon48.png",
         "128": "icon128.png"
     },
+    "host_permissions": ["*://www.youtube.com/*"],
     "content_scripts": [
         {
-            "matches": ["https://www.youtube.com/*"],
+            "matches": ["*://www.youtube.com/*"],
             "js": ["Content.js"]
         }
     ]
