@@ -1,5 +1,5 @@
 {
-    "manifest_version": 3,
+    "manifest_version": 2,
     "name": "Block Youtube Shorts",
     "description": "Blocks the Youtube Short buttons and sections on the main page.",
     "version": "1.0",
