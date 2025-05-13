@@ -1,7 +1,7 @@
 {
-    "manifest_version": 2,
-    "name": "Block Youtube Shorts",
-    "description": "Blocks the Youtube Short buttons and sections on the main page.",
+    "manifest_version": 3,
+    "name": "Remove Youtube Shorts",
+    "description": "Removes any trace of Shorts from Youtube.",
     "version": "1.0",
     "icons": {
         "16": "icon16.png",
@@ -9,11 +9,25 @@
         "48": "icon48.png",
         "128": "icon128.png"
     },
+    "permissions": ["scripting"],
     "host_permissions": ["*://www.youtube.com/*"],
     "content_scripts": [
         {
             "matches": ["*://www.youtube.com/*"],
-            "js": ["Content.js"]
+            "js": ["Content.js"],
+            "run_at": "document_idle"
+        },
+        {
+            "matches": ["*://www.youtube.com/*"],
+            "js": ["Redirect.js"],
+            "run_at": "document_start"
         }
-    ]
+    ],
+    "action": {
+        "default_icon": {
+            "16": "icon16.png",
+            "32": "icon32.png"
+        }
+    }
 }
+  

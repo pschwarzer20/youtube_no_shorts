@@ -1,38 +1,25 @@
 
-function removeShortButtons(){
-    const shortsButtons = document.querySelectorAll('a[title="Shorts"]');
+const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+        mutation.addedNodes.forEach(node => {
+            if (node.nodeType !== Node.ELEMENT_NODE) return;
 
-    shortsButtons.forEach(button => {
-        button.remove();
-    });
-}
-
-function removeShortSections(){
-    const sections = document.querySelectorAll("span#title.style-scope.ytd-rich-shelf-renderer");
-    sections.forEach(title => {
-        if (title.textContent.trim() === "Shorts") {
-            var section = title;
-            for (let i = 1; i < 7; i++) {
-                section = section.parentElement;
-                if (!section){
-                    return;
-                }
+            // Remove shorts from sidebar
+            if (node.tagName === "A" && node.title === "Shorts"){
+                node.remove();
             }
 
-            if (section.className == "style-scope ytd-rich-shelf-renderer") {
-                section.style.display = "none";
+            // Remove shorts sections from right side
+            if (node.nodeName.toLowerCase() === "ytd-reel-shelf-renderer"){
+                node.remove();
             }
-        }
+
+            // Remove shorts sections
+            if (node.hasAttribute?.("is-shorts")){
+                node.remove();
+            }
+        });
     });
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    removeShortButtons();
-    removeShortSections();
 });
 
-const observer = new MutationObserver(function (mutations) {
-    removeShortButtons();
-    removeShortSections();
-});
-observer.observe(document.body, { childList: true, subtree: true });
+observer.observe(document.body, {childList: true, subtree: true});
